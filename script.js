@@ -18,30 +18,19 @@ function generateResult(oriSet){
     var originalList = new Set();
     originalList = oriSet;
 
-    if(originalList.size < groupC * memberC){
-        alert('名單人數大於所輸入的數字');
-        return;
-    }
-    
     var originalArray = Array.from(originalList);
     originalArray.sort(() => Math.random()- 0.5);
     
     var genContent = document.getElementById('genContent');
     genContent.innerHTML = '';
-    
-    var memberPerGroup = Math.ceil(originalArray.length / groupC);
-    var startIndex = 0;
 
     for(let i = 0; i < groupC; i++){
         var par = document.createElement('p');
         var memContent = "";
-        var endIndex = Math.min(startIndex + memberPerGroup, originalArray.length);
-        for(let j = startIndex; j < endIndex; j++){
-            memContent += originalArray[j] + " ";
+        for(let j = 0; j < memberC; j++){
+            memContent += originalArray[i*memberC +j] + " ";
         }
-        par.textContent = "第" + (i + 1) + "組：" + memContent.trim();
+        par.textContent = "第" + (i+1) + "組：" + memContent;
         genContent.appendChild(par);
-
-        startIndex = endIndex;
     }
 }
